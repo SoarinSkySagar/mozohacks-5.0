@@ -1,8 +1,13 @@
 from textwrap import dedent
 from crewai import Task
+from crewai_tools import SerperDevTool
+tool = SerperDevTool()
 
 from dotenv import load_dotenv
 load_dotenv()
+from bs4 import BeautifulSoup
+import requests
+
 
 class WebDev():
     def evaluation_task(self, agent, project_idea):
@@ -11,14 +16,24 @@ class WebDev():
                     Evaluate an existing website for improvements and enhancements.
                     Project Idea: {project_idea}
                     Tasks:
-                    1. Analyze the current website's user experience and performance metrics.
-                    2. Identify areas for improvement in design, functionality, and responsiveness.
-                    3. Develop a plan for implementing enhancements and optimizations.
-                    4. Implement the planned changes and improvements.
-                    5. Test the updated website thoroughly to ensure functionality and performance.
-                    6. Deploy the enhanced website and monitor user feedback and analytics.
+                     Analyze the current website's user experience and performance metrics.
+                     Identify areas for improvement in design, functionality, and responsiveness.
+                     Develop a plan for implementing enhancements and optimizations.
+                     Implement the planned changes and improvements.
+                     Test the updated website thoroughly to ensure functionality and performance.
+                     Deploy the enhanced website and monitor user feedback and analytics.
                 """),
             expected_output="An enhanced and optimized website with improved user experience and performance.",
+            agent=agent
+        )
+    
+    def scrape_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
+                Based on the project idea: {project_idea} scrape data from the web. 
+                
+                """),
+            expected_output="",
             agent=agent
         )
     
@@ -40,11 +55,11 @@ class WebDev():
                     Test the functionality, performance, and compatibility of a website.
                     Project Idea: {project_idea}
                     Tasks:
-                    1. Conduct functional testing to ensure all features work as intended.
-                    2. Perform performance testing to measure website speed and responsiveness.
-                    3. Test compatibility across different browsers, devices, and screen sizes.
-                    4. Identify and fix any bugs or issues discovered during testing.
-                    5. Document test results and prepare a test report with recommendations.
+                    Conduct functional testing to ensure all features work as intended.
+                     Perform performance testing to measure website speed and responsiveness.
+                     Test compatibility across different browsers, devices, and screen sizes.
+                     Identify and fix any bugs or issues discovered during testing.
+                     Document test results and prepare a test report with recommendations.
                 """),
             expected_output="A thoroughly tested website with documented test results and recommendations.",
             agent=agent
@@ -63,16 +78,26 @@ class AppDev():
                     Evaluate an existing mobile application for improvements and enhancements.
                     Project Idea: {project_idea}
                     Tasks:
-                    1. Analyze the current app's user experience and performance metrics.
-                    2. Identify areas for improvement in design, functionality, and usability.
-                    3. Develop a plan for implementing enhancements and optimizations.
-                    4. Implement the planned changes and improvements.
-                    5. Test the updated app thoroughly to ensure functionality and usability.
-                    6. Deploy the enhanced app and monitor user feedback and analytics.
+                     Analyze the current app's user experience and performance metrics.
+                     Identify areas for improvement in design, functionality, and usability.
+                     Develop a plan for implementing enhancements and optimizations.
+                     Implement the planned changes and improvements.
+                     Test the updated app thoroughly to ensure functionality and usability.
+                     Deploy the enhanced app and monitor user feedback and analytics.
                 """),
             expected_output="An enhanced and optimized mobile application with improved user experience and performance.",
             agent=agent
         )
+        
+    def scrape_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
+                Based on the project idea: {project_idea} scrape data from the web. 
+                
+                """),
+            expected_output="",
+            agent=agent
+        )    
     
     def code_development_task(self, agent, project_idea):
         return Task(
@@ -80,13 +105,13 @@ class AppDev():
                     Develop a feature-rich and user-friendly mobile application.
                     Project Idea: {project_idea}
                     Tasks:
-                    1. Gather requirements from stakeholders and define the app's functionality.
-                    2. Design the user interface (UI) and user experience (UX) for mobile devices.
-                    3. Develop the frontend components and features for the mobile app using frameworks like React Native.
-                    4. Develop the backend systems and APIs using technologies like Node.js or Firebase.
-                    5. Integrate frontend and backend components for seamless functionality.
-                    6. Perform thorough testing on various devices and platforms to ensure app quality.
-                    7. Deploy the app to app stores (e.g., Google Play Store, Apple App Store) and optimize for performance.
+                     Gather requirements from stakeholders and define the app's functionality.
+                     Design the user interface (UI) and user experience (UX) for mobile devices.
+                     Develop the frontend components and features for the mobile app using frameworks like React Native.
+                     Develop the backend systems and APIs using technologies like Node.js or Firebase.
+                     Integrate frontend and backend components for seamless functionality.
+                     Perform thorough testing on various devices and platforms to ensure app quality.
+                     Deploy the app to app stores (e.g., Google Play Store, Apple App Store) and optimize for performance.
                     
 
                     export default LoginScreen;
@@ -101,11 +126,11 @@ class AppDev():
                     Test the functionality, usability, and performance of a mobile application.
                     Project Idea: {project_idea}
                     Tasks:
-                    1. Conduct functional testing to ensure all features work as intended.
-                    2. Perform usability testing to evaluate user experience and interface design.
-                    3. Test performance on various devices and platforms for speed and responsiveness.
-                    4. Identify and fix any bugs or issues discovered during testing.
-                    5. Document test results and prepare a test report with recommendations.
+                     Conduct functional testing to ensure all features work as intended.
+                     Perform usability testing to evaluate user experience and interface design.
+                     Test performance on various devices and platforms for speed and responsiveness.
+                     Identify and fix any bugs or issues discovered during testing.
+                     Document test results and prepare a test report with recommendations.
                 """),
             expected_output="A thoroughly tested mobile application with documented test results and recommendations.",
             agent=agent
@@ -118,17 +143,30 @@ class GameDev():
                     Evaluate an existing game for improvements and enhancements.
                     Project Idea: {project_idea}
                     Tasks:
-                    1. Analyze the current game's gameplay, mechanics, and user experience.
-                    2. Identify areas for improvement in graphics, sound, controls, and gameplay flow.
-                    3. Develop a plan for implementing enhancements and optimizations.
-                    4. Implement the planned changes and improvements in the game code.
-                    5. Test the updated game thoroughly to ensure enhanced gameplay and user experience.
-                    6. Deploy the enhanced game and gather feedback from players for further improvements.
+                     Analyze the current game's gameplay, mechanics, and user experience.
+                     Identify areas for improvement in graphics, sound, controls, and gameplay flow.
+                     Develop a plan for implementing enhancements and optimizations.
+                     Implement the planned changes and improvements in the game code.
+                     Test the updated game thoroughly to ensure enhanced gameplay and user experience.
+                     Deploy the enhanced game and gather feedback from players for further improvements.
                 """),
             expected_output="An enhanced and optimized game with improved gameplay and user experience.",
             agent=agent
         )
     
+    def scrape_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
+                Based on the project idea: {project_idea} scrape data from the web. 
+                Based on the project idea: {project_idea}, scrape data from the web. 
+        The data to be scraped includes article titles and URLs from a news website, reddit, youtube videos , medium, hashnode blogs. Give it in tabular form
+
+                """),
+            expected_output="A tabular data of the available resources scraped, urls of youtube videos, medium, hashnode blogs, reddit posts etc",
+            agent=agent,
+            tool=tool
+            
+        )
     def code_development_task(self, agent, project_idea):
         return Task(
             description=dedent(f"""\

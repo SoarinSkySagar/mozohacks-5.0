@@ -40,14 +40,17 @@ def create_project(project_type, project_idea):
     evaluation_task = tasks.evaluation_task(senior_scraper_agent, project_idea)
 
     if project_type == "website":
+        scrape_task = tasks.scrape_task(junior_scraper_agent, project_idea)
         code_task = tasks.code_development_task(frontend_senior_agent, project_idea)
         testing_task = tasks.testing_task(tester_agent, project_idea)
         agentsArr = [senior_scraper_agent, frontend_senior_agent, tester_agent]
     elif project_type == "app":
+        scrape_task = tasks.scrape_task(junior_scraper_agent, project_idea)
         code_task = tasks.code_development_task(senior_fe_agent, project_idea)
         testing_task = tasks.testing_task(app_tester_agent, project_idea)
         agentsArr = [senior_scraper_agent, senior_fe_agent, app_tester_agent]
     else:
+        scrape_task = tasks.scrape_task(junior_scraper_agent, project_idea)
         code_task = tasks.code_development_task(senior_game_dev_agent, project_idea)
         testing_task = tasks.testing_task(game_tester_agent, project_idea)
         agentsArr = [senior_scraper_agent, senior_game_dev_agent, game_tester_agent]
@@ -56,6 +59,7 @@ def create_project(project_type, project_idea):
         agents= agentsArr,
         tasks= [
             evaluation_task,
+            scrape_task,
             code_task,
             testing_task
         ],

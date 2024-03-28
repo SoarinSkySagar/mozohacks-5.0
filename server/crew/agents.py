@@ -1,11 +1,13 @@
 from dotenv import load_dotenv
 load_dotenv()
+from crewai_tools import SerperDevTool
 
 from textwrap import dedent
 from crewai import Agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.9)
+tool = SerperDevTool()
 
 class ProjectAgents():
     def input_agent(self):
@@ -35,7 +37,8 @@ class ProjectAgents():
             backstory='Proficient in web scraping and gathering data from various sources.',
             verbose=True,
             allow_delegation=False,
-            llm=llm
+            llm=llm,
+            tool=tool
         )
 
     def senior_scraper_agent(self):
@@ -45,7 +48,8 @@ class ProjectAgents():
             backstory='Experienced in analyzing and curating relevant data from various sources.',
             verbose=True,
             allow_delegation=False,
-            llm=llm
+            llm=llm,
+            tool=tool
         )
 
     def cto_agent(self):
