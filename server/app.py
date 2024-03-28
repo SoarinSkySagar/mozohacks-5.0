@@ -17,7 +17,7 @@ def input():
             project_idea = data['idea']
             dev_result = create_project(project_type, project_idea)
             print(dev_result)
-            return jsonify({'project_type': project_type, 'project_idea': project_idea})
+            return jsonify({'project_type': project_type, 'project_idea': project_idea, 'response': dev_result})
         else:
             return jsonify({'error': 'Invalid data'})
     else:

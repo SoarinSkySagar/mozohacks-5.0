@@ -1,23 +1,7 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 from crewai import Crew
 
-from tasks import AppDev, GameDev, WebDev
-from agents import ProjectAgents
-
-project_type = input("Enter the project type (website, app, game): ")
-project_idea = input("Enter your project idea: ")
-
-if project_type == "website":
-    tasks = WebDev()
-elif project_type == "app":
-    tasks = AppDev()
-elif project_type == "game":
-    tasks = GameDev()
-else:
-    print("Invalid project type. Please try again.")
-    exit()
+from .tasks import AppDev, GameDev, WebDev
+from .agents import ProjectAgents
 
 agents = ProjectAgents()
 
@@ -44,34 +28,39 @@ junior_game_dev_agent = agents.junior_game_dev_agent()
 senior_game_dev_agent = agents.senior_game_dev_agent()
 game_tester_agent = agents.game_tester_agent()
 
+def create_project(project_type, project_idea):
 
+    if project_type == "website":
+        tasks = WebDev()
+    elif project_type == "app":
+        tasks = AppDev()
+    elif project_type == "game":
+        tasks = GameDev()
 
-evaluation_task = tasks.evaluation_task(senior_scraper_agent, project_idea)
+    evaluation_task = tasks.evaluation_task(senior_scraper_agent, project_idea)
 
+    if project_type == "website":
+        code_task = tasks.code_development_task(frontend_senior_agent, project_idea)
+        testing_task = tasks.testing_task(tester_agent, project_idea)
+        agentsArr = [senior_scraper_agent, frontend_senior_agent, tester_agent]
+    elif project_type == "app":
+        code_task = tasks.code_development_task(senior_fe_agent, project_idea)
+        testing_task = tasks.testing_task(app_tester_agent, project_idea)
+        agentsArr = [senior_scraper_agent, senior_fe_agent, app_tester_agent]
+    else:
+        code_task = tasks.code_development_task(senior_game_dev_agent, project_idea)
+        testing_task = tasks.testing_task(game_tester_agent, project_idea)
+        agentsArr = [senior_scraper_agent, senior_game_dev_agent, game_tester_agent]
 
-if project_type == "website":
-    code_task = tasks.code_development_task(frontend_senior_agent, project_idea)
-    testing_task = tasks.testing_task(tester_agent, project_idea)
-    agentsArr = [senior_scraper_agent, frontend_senior_agent, tester_agent]
-elif project_type == "app":
-    code_task = tasks.code_development_task(senior_fe_agent, project_idea)
-    testing_task = tasks.testing_task(app_tester_agent, project_idea)
-    agentsArr = [senior_scraper_agent, senior_fe_agent, app_tester_agent]
-else:
-    code_task = tasks.code_development_task(senior_game_dev_agent, project_idea)
-    testing_task = tasks.testing_task(game_tester_agent, project_idea)
-    agentsArr = [senior_scraper_agent, senior_game_dev_agent, game_tester_agent]
+    crew = Crew(
+        agents= agentsArr,
+        tasks= [
+            evaluation_task,
+            code_task,
+            testing_task
+        ],
+        verbose=True
+    )
 
-crew = Crew(
-    agents= agentsArr,
-    tasks= [
-        evaluation_task,
-        code_task,
-        testing_task
-    ],
-    verbose=True
-)
-
-project = crew.kickoff()
-
-print(project)
+    project = crew.kickoff()
+    return project

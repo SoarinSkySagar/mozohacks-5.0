@@ -5,7 +5,7 @@ from textwrap import dedent
 from crewai import Agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.9, google_api_key="")
+llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.9)
 
 class ProjectAgents():
     def input_agent(self):
