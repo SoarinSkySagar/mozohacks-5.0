@@ -18,7 +18,7 @@ class WebDev():
                     5. Test the updated website thoroughly to ensure functionality and performance.
                     6. Deploy the enhanced website and monitor user feedback and analytics.
                 """),
-            expected_output="An enhanced and optimized website with improved user experience and performance.",
+            expected_output="an enhanced idea for the application, and more suggestions for improvement if a codebase has been given, also adding appropriate comments to code",
             agent=agent
         )
     
@@ -30,7 +30,7 @@ class WebDev():
                     Tasks:write error free code fro the requested project
                     
                     """),
-            expected_output='A high-quality, responsive, and well-tested website.',
+            expected_output='A high-quality, responsive, and well-tested code for website, using nodejs and nextjs, with different code snippets for both frameworks.',
             agent=agent
         )
     
@@ -46,7 +46,7 @@ class WebDev():
                     4. Identify and fix any bugs or issues discovered during testing.
                     5. Document test results and prepare a test report with recommendations.
                 """),
-            expected_output="A thoroughly tested website with documented test results and recommendations.",
+            expected_output="ensuring the given code to be error free and responsive, then passing the code with the required changes, if any",
             agent=agent
         )
     
@@ -60,7 +60,7 @@ class AppDev():
     def evaluation_task(self, agent, project_idea):
         return Task(
             description=dedent(f"""\
-                    Evaluate an existing mobile application for improvements and enhancements.
+                    Evaluate an existing application for improvements and enhancements.
                     Project Idea: {project_idea}
                     Tasks:
                     1. Analyze the current app's user experience and performance metrics.
@@ -70,7 +70,7 @@ class AppDev():
                     5. Test the updated app thoroughly to ensure functionality and usability.
                     6. Deploy the enhanced app and monitor user feedback and analytics.
                 """),
-            expected_output="An enhanced and optimized mobile application with improved user experience and performance.",
+            expected_output="an enhanced idea for the application, and more suggestions for improvement if a codebase has been given, also adding appropriate comments to code",
             agent=agent
         )
     
@@ -86,12 +86,9 @@ class AppDev():
                     4. Develop the backend systems and APIs using technologies like Node.js or Firebase.
                     5. Integrate frontend and backend components for seamless functionality.
                     6. Perform thorough testing on various devices and platforms to ensure app quality.
-                    7. Deploy the app to app stores (e.g., Google Play Store, Apple App Store) and optimize for performance.
-                    
 
-                    export default LoginScreen;
                 """),
-            expected_output='A high-quality, user-friendly, and well-tested mobile application.',
+            expected_output='A high-quality,human readable and efficient code for the mobile application using flutter',
             agent=agent
         )
     
@@ -107,7 +104,7 @@ class AppDev():
                     4. Identify and fix any bugs or issues discovered during testing.
                     5. Document test results and prepare a test report with recommendations.
                 """),
-            expected_output="A thoroughly tested mobile application with documented test results and recommendations.",
+            expected_output="ensuring the given code to be error free and responsive, then passing the code with the required changes, if any",
             agent=agent
         )
     
@@ -125,7 +122,7 @@ class GameDev():
                     5. Test the updated game thoroughly to ensure enhanced gameplay and user experience.
                     6. Deploy the enhanced game and gather feedback from players for further improvements.
                 """),
-            expected_output="An enhanced and optimized game with improved gameplay and user experience.",
+            expected_output="an enhanced idea for the application, and more suggestions for improvement if a codebase has been given, also adding appropriate comments to code.",
             agent=agent
         )
     
@@ -144,7 +141,7 @@ class GameDev():
                     7. Deploy the game to distribution platforms (Steam, App Store, Google Play) and promote it through marketing channels.
                     
                 """),
-            expected_output='A high-quality, engaging, and well-tested game.',
+            expected_output='A high-quality, and efficient C# code for the game using Unity or Unreal Engine, with appropriate comments and documentation.',
             agent=agent
         )
     
@@ -160,6 +157,6 @@ class GameDev():
                     4. Identify and fix any bugs or issues discovered during testing.
                     5. Document test results and prepare a test report with recommendations.
                 """),
-            expected_output="A thoroughly tested game with documented test results and recommendations.",
+            expected_output="ensuring the given code to be error free and responsive, then passing the code with the required changes, if any",
             agent=agent
         )
