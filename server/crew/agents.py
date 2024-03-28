@@ -1,31 +1,33 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from textwrap import dedent
 from crewai import Agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-class DevelopmentAgents:
-    def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True)
+llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.9, google_api_key="")
 
-    def input_agent(self, project_idea):
+class ProjectAgents():
+    def input_agent(self):
         return Agent(
             role='Input Agent',
-            goal=f'Decide which development crew should work on the "{project_idea}" project',
+            goal=f'Decide which development crew should work on the project',
             backstory='Experienced in assessing project requirements and allocating resources.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
-
-    def ui_ux_agent(self, project_idea):
+    
+    def ui_ux_agent(self):
         return Agent(
             role='UI/UX Agent',
             goal='Design intuitive and engaging user interfaces',
             backstory='Skilled in user experience design and ensuring optimal usability.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
-
+    
     def junior_scraper_agent(self):
         return Agent(
             role='Junior Scraper Agent',
@@ -33,7 +35,7 @@ class DevelopmentAgents:
             backstory='Proficient in web scraping and gathering data from various sources.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def senior_scraper_agent(self):
@@ -43,7 +45,7 @@ class DevelopmentAgents:
             backstory='Experienced in analyzing and curating relevant data from various sources.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def cto_agent(self):
@@ -53,7 +55,7 @@ class DevelopmentAgents:
             backstory='Seasoned technology leader with expertise in project management and quality assurance.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
 
     def ceo_agent(self):
@@ -63,7 +65,7 @@ class DevelopmentAgents:
             backstory='Experienced in leading organizations, building relationships, and delivering successful projects.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def devrel_agent(self):
@@ -73,7 +75,7 @@ class DevelopmentAgents:
             backstory='Skilled in fostering developer communities and promoting best practices.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     # Website Development Agents
@@ -84,7 +86,7 @@ class DevelopmentAgents:
             backstory='Junior developer with knowledge of HTML, CSS, and JavaScript.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def frontend_senior_agent(self):
@@ -94,7 +96,7 @@ class DevelopmentAgents:
             backstory='Experienced frontend developer with expertise in modern frameworks and tools.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
 
     def lead_frontend_agent(self):
@@ -104,7 +106,7 @@ class DevelopmentAgents:
             backstory='Highly skilled frontend developer with leadership and project management experience.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
 
     def backend_junior_agent(self):
@@ -114,7 +116,7 @@ class DevelopmentAgents:
             backstory='Junior developer with knowledge of server-side programming languages and databases.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def main_backend_agent(self):
@@ -124,7 +126,7 @@ class DevelopmentAgents:
             backstory='Experienced backend developer with expertise in server architecture and scalability.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
 
     def integration_dev_agent(self):
@@ -134,7 +136,7 @@ class DevelopmentAgents:
             backstory='Developer skilled in connecting various systems and ensuring seamless communication.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def tester_agent(self):
@@ -144,7 +146,7 @@ class DevelopmentAgents:
             backstory='Experienced in testing software applications and identifying bugs and issues.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def senior_developer_agent(self):
@@ -154,7 +156,7 @@ class DevelopmentAgents:
             backstory='Highly skilled developer with expertise in software architecture and team leadership.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
 
     # App Development Agents
@@ -165,7 +167,7 @@ class DevelopmentAgents:
             backstory='Junior developer with knowledge of mobile app frameworks and UI/UX design.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def senior_fe_agent(self):
@@ -175,7 +177,7 @@ class DevelopmentAgents:
             backstory='Experienced frontend developer with expertise in mobile app development and performance optimization.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
 
     def backend_dev_agent(self):
@@ -185,7 +187,7 @@ class DevelopmentAgents:
             backstory='Developer skilled in server-side programming and integration with mobile app frameworks.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def app_tester_agent(self):
@@ -195,7 +197,7 @@ class DevelopmentAgents:
             backstory='Experienced in testing mobile applications on various devices and platforms.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     # Game Development Agents
@@ -206,7 +208,7 @@ class DevelopmentAgents:
             backstory='Junior developer with knowledge of game engines and programming languages.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )
 
     def senior_game_dev_agent(self):
@@ -216,7 +218,7 @@ class DevelopmentAgents:
             backstory='Experienced game developer with expertise in game design, mechanics, and optimization.',
             verbose=True,
             allow_delegation=True,
-            llm=self.llm
+            llm=llm
         )
 
     def game_tester_agent(self):
@@ -226,5 +228,5 @@ class DevelopmentAgents:
             backstory='Experienced in testing games across various platforms and identifying bugs and issues.',
             verbose=True,
             allow_delegation=False,
-            llm=self.llm
+            llm=llm
         )

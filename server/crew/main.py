@@ -1,51 +1,77 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from langchain_google_genai import ChatGoogleGenerativeAI
-from crewai import Crew, Process
+from crewai import Crew
 
-from .tasks import DevelopmentTasks
-from .agents import DevelopmentAgents
+from tasks import AppDev, GameDev, WebDev
+from agents import ProjectAgents
 
-llm = ChatGoogleGenerativeAI(model="gemini-pro", verbose=True, temperature=0.5)
+project_type = input("Enter the project type (website, app, game): ")
+project_idea = input("Enter your project idea: ")
 
-tasks = DevelopmentTasks()
-agents = DevelopmentAgents()
+if project_type == "website":
+    tasks = WebDev()
+elif project_type == "app":
+    tasks = AppDev()
+elif project_type == "game":
+    tasks = GameDev()
+else:
+    print("Invalid project type. Please try again.")
+    exit()
 
+agents = ProjectAgents()
+
+input_agent = agents.input_agent()
+ui_ux_agent = agents.ui_ux_agent()
 junior_scraper_agent = agents.junior_scraper_agent()
 senior_scraper_agent = agents.senior_scraper_agent()
 cto_agent = agents.cto_agent()
 ceo_agent = agents.ceo_agent()
 devrel_agent = agents.devrel_agent()
+frontend_junior_agent = agents.frontend_junior_agent()
+frontend_senior_agent = agents.frontend_senior_agent()
+lead_frontend_agent = agents.lead_frontend_agent()
+backend_junior_agent = agents.backend_junior_agent()
+main_backend_agent = agents.main_backend_agent()
+integration_dev_agent = agents.integration_dev_agent()
+tester_agent = agents.tester_agent()
+senior_developer_agent = agents.senior_developer_agent()
+junior_fe_agent = agents.junior_fe_agent()
+senior_fe_agent = agents.senior_fe_agent()
+backend_dev_agent = agents.backend_dev_agent()
+app_tester_agent = agents.app_tester_agent()
+junior_game_dev_agent = agents.junior_game_dev_agent()
+senior_game_dev_agent = agents.senior_game_dev_agent()
+game_tester_agent = agents.game_tester_agent()
 
-def create_project(project_type, project_idea):
 
-    input_agent = agents.input_agent(project_idea)
-    ui_ux_agent = agents.ui_ux_agent(project_idea)
 
-    if project_type == "website":
-        development_task = tasks.website_development_task(cto_agent, project_idea)
-        development_agents = [ui_ux_agent, agents.frontend_junior_agent(), agents.frontend_senior_agent(),
-                            agents.lead_frontend_agent(), agents.backend_junior_agent(), agents.main_backend_agent(),
-                            agents.integration_dev_agent(), agents.tester_agent(), agents.senior_developer_agent()]
-    elif project_type == "app":
-        development_task = tasks.app_development_task(cto_agent, project_idea)
-        development_agents = [agents.junior_fe_agent(), agents.senior_fe_agent(), agents.backend_dev_agent(), agents.app_tester_agent()]
-    elif project_type == "game":
-        development_task = tasks.game_development_task(cto_agent, project_idea)
-        development_agents = [agents.junior_game_dev_agent(), agents.senior_game_dev_agent(), agents.game_tester_agent()]
-    else:
-        print("Invalid project type. Please try again.")
-        exit()
+evaluation_task = tasks.evaluation_task(senior_scraper_agent, project_idea)
 
-    development_crew = Crew(
-        agents=development_agents + [input_agent, ui_ux_agent, junior_scraper_agent, senior_scraper_agent, cto_agent, ceo_agent, devrel_agent],
-        tasks=[development_task],
-        verbose=True,
-        process=Process.sequential,
-        
-    )
 
-    development_result = development_crew.kickoff()
+if project_type == "website":
+    code_task = tasks.code_development_task(frontend_senior_agent, project_idea)
+    testing_task = tasks.testing_task(tester_agent, project_idea)
+    agentsArr = [senior_scraper_agent, frontend_senior_agent, tester_agent]
+elif project_type == "app":
+    code_task = tasks.code_development_task(senior_fe_agent, project_idea)
+    testing_task = tasks.testing_task(app_tester_agent, project_idea)
+    agentsArr = [senior_scraper_agent, senior_fe_agent, app_tester_agent]
+else:
+    code_task = tasks.code_development_task(senior_game_dev_agent, project_idea)
+    testing_task = tasks.testing_task(game_tester_agent, project_idea)
+    agentsArr = [senior_scraper_agent, senior_game_dev_agent, game_tester_agent]
 
-    return development_result
+crew = Crew(
+    agents= agentsArr,
+    tasks= [
+        evaluation_task,
+        code_task,
+        testing_task
+    ],
+    verbose=True
+)
+
+project = crew.kickoff()
+
+print(project)

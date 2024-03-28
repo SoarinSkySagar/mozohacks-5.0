@@ -1,11 +1,13 @@
 from textwrap import dedent
 from crewai import Task
 
-class DevelopmentTasks:
-    def website_development_task(self, agent, project_idea):
-        return {
-            "evaluation_task": Task(
-                description=dedent(f"""\
+from dotenv import load_dotenv
+load_dotenv()
+
+class WebDev():
+    def evaluation_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Evaluate an existing website for improvements and enhancements.
                     Project Idea: {project_idea}
                     Tasks:
@@ -16,40 +18,25 @@ class DevelopmentTasks:
                     5. Test the updated website thoroughly to ensure functionality and performance.
                     6. Deploy the enhanced website and monitor user feedback and analytics.
                 """),
-                expected_output="An enhanced and optimized website with improved user experience and performance.",
-                agent=agent
-            ),
-            "code_development_task": Task(
-                description=dedent(f"""\
+            expected_output="An enhanced and optimized website with improved user experience and performance.",
+            agent=agent
+        )
+    
+    def code_development_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Develop a fully functional website with a modern and intuitive user interface.
                     Project Idea: {project_idea}
-                    Tasks:
-                    1. Conduct user research and gather requirements.
-                    2. Design the user interface and user experience (UI/UX).
-                    3. Develop the frontend components and features using HTML, CSS, and JavaScript.
-                    4. Develop the backend systems and APIs using a backend framework like Django or Flask.
-                    5. Integrate frontend and backend components for seamless communication.
-                    6. Thoroughly test the website using automated and manual testing methods.
-                    7. Deploy the website to a hosting platform (e.g., AWS, Heroku) and optimize for performance.
+                    Tasks:write error free code fro the requested project
                     
-                    Example Code:
-                    # HTML code for a basic webpage
-                    <!DOCTYPE html>
-                    <html>
-                        <head>
-                            <title>My Website</title>
-                        </head>
-                        <body>
-                            <h1>Welcome to My Website</h1>
-                            <p>This is a sample webpage.</p>
-                        </body>
-                    </html>
-                """),
-                expected_output='A high-quality, responsive, and well-tested website.',
-                agent=agent
-            ),
-            "testing_task": Task(
-                description=dedent(f"""\
+                    """),
+            expected_output='A high-quality, responsive, and well-tested website.',
+            agent=agent
+        )
+    
+    def testing_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Test the functionality, performance, and compatibility of a website.
                     Project Idea: {project_idea}
                     Tasks:
@@ -59,15 +46,20 @@ class DevelopmentTasks:
                     4. Identify and fix any bugs or issues discovered during testing.
                     5. Document test results and prepare a test report with recommendations.
                 """),
-                expected_output="A thoroughly tested website with documented test results and recommendations.",
-                agent=agent
-            )
-        }
-
-    def app_development_task(self, agent, project_idea):
-        return {
-            "evaluation_task": Task(
-                description=dedent(f"""\
+            expected_output="A thoroughly tested website with documented test results and recommendations.",
+            agent=agent
+        )
+    
+    
+    
+    
+    
+    
+    
+class AppDev():
+    def evaluation_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Evaluate an existing mobile application for improvements and enhancements.
                     Project Idea: {project_idea}
                     Tasks:
@@ -78,11 +70,13 @@ class DevelopmentTasks:
                     5. Test the updated app thoroughly to ensure functionality and usability.
                     6. Deploy the enhanced app and monitor user feedback and analytics.
                 """),
-                expected_output="An enhanced and optimized mobile application with improved user experience and performance.",
-                agent=agent
-            ),
-            "code_development_task": Task(
-                description=dedent(f"""\
+            expected_output="An enhanced and optimized mobile application with improved user experience and performance.",
+            agent=agent
+        )
+    
+    def code_development_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Develop a feature-rich and user-friendly mobile application.
                     Project Idea: {project_idea}
                     Tasks:
@@ -97,11 +91,13 @@ class DevelopmentTasks:
 
                     export default LoginScreen;
                 """),
-                expected_output='A high-quality, user-friendly, and well-tested mobile application.',
-                agent=agent
-            ),
-            "testing_task": Task(
-                description=dedent(f"""\
+            expected_output='A high-quality, user-friendly, and well-tested mobile application.',
+            agent=agent
+        )
+    
+    def testing_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Test the functionality, usability, and performance of a mobile application.
                     Project Idea: {project_idea}
                     Tasks:
@@ -111,15 +107,14 @@ class DevelopmentTasks:
                     4. Identify and fix any bugs or issues discovered during testing.
                     5. Document test results and prepare a test report with recommendations.
                 """),
-                expected_output="A thoroughly tested mobile application with documented test results and recommendations.",
-                agent=agent
-            )
-        }
-
-    def game_development_task(self, agent, project_idea):
-        return {
-            "evaluation_task": Task(
-                description=dedent(f"""\
+            expected_output="A thoroughly tested mobile application with documented test results and recommendations.",
+            agent=agent
+        )
+    
+class GameDev():
+    def evaluation_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Evaluate an existing game for improvements and enhancements.
                     Project Idea: {project_idea}
                     Tasks:
@@ -130,11 +125,13 @@ class DevelopmentTasks:
                     5. Test the updated game thoroughly to ensure enhanced gameplay and user experience.
                     6. Deploy the enhanced game and gather feedback from players for further improvements.
                 """),
-                expected_output="An enhanced and optimized game with improved gameplay and user experience.",
-                agent=agent
-            ),
-            "code_development_task": Task(
-                description=dedent(f"""\
+            expected_output="An enhanced and optimized game with improved gameplay and user experience.",
+            agent=agent
+        )
+    
+    def code_development_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Develop an engaging and immersive game experience.
                     Project Idea: {project_idea}
                     Tasks:
@@ -147,11 +144,13 @@ class DevelopmentTasks:
                     7. Deploy the game to distribution platforms (Steam, App Store, Google Play) and promote it through marketing channels.
                     
                 """),
-                expected_output='A high-quality, engaging, and well-tested game.',
-                agent=agent
-            ),
-            "testing_task": Task(
-                description=dedent(f"""\
+            expected_output='A high-quality, engaging, and well-tested game.',
+            agent=agent
+        )
+    
+    def testing_task(self, agent, project_idea):
+        return Task(
+            description=dedent(f"""\
                     Test the functionality, performance, and compatibility of a game.
                     Project Idea: {project_idea}
                     Tasks:
@@ -161,7 +160,6 @@ class DevelopmentTasks:
                     4. Identify and fix any bugs or issues discovered during testing.
                     5. Document test results and prepare a test report with recommendations.
                 """),
-                expected_output="A thoroughly tested game with documented test results and recommendations.",
-                agent=agent
-            )
-        }
+            expected_output="A thoroughly tested game with documented test results and recommendations.",
+            agent=agent
+        )
