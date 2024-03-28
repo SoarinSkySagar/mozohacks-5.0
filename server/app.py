@@ -3,7 +3,6 @@ from crew.main import create_project
 from flask_cors import CORS
 from uuid import uuid4
 from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -37,12 +36,7 @@ def input_data():
                 'events': [],
                 'result': dev_result
             }
-            collection.insert_one({
-                'req_id': req_id,
-                'project_type': project_type,
-                'project_idea': project_idea,
-                'result': dev_result
-            })
+            collection.insert_one(jobs[req_id])
             return jsonify({'req_id': req_id})
         else:
             return jsonify({'error': 'Invalid data'})
