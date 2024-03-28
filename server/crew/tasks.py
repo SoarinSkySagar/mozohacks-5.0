@@ -19,7 +19,7 @@ class WebDev():
                     6. Deploy the enhanced website and monitor user feedback and analytics.
                 """),
             expected_output="An enhanced and optimized website with improved user experience and performance.",
-            agent=agent
+            agent=integration_dev_agent
         )
     
     def code_development_task(self, agent, project_idea):
@@ -31,7 +31,7 @@ class WebDev():
                     
                     """),
             expected_output='A high-quality, responsive, and well-tested website.',
-            agent=agent
+            agent=senior_developer_agent
         )
     
     def testing_task(self, agent, project_idea):
