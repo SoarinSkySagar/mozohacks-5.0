@@ -19,23 +19,20 @@ def input_data():
         if 'productIdea' in data and 'momma' in data:
             project_type = data['productIdea']
             project_idea = data['momma']
-            req_id = str(uuid4())  # Generate a unique request ID
+            req_id = str(uuid4())
+            dev_result = create_project(project_type, project_idea)
             jobs[req_id] = {
                 'project_type': project_type,
                 'project_idea': project_idea,
-                'status': 'RUNNING',
+                'status': 'COMPLETE',
                 'events': [],
-                'result': None
+                'result': dev_result
             }
-            dev_result = create_project(project_type, project_idea)
-            jobs[req_id]['result'] = dev_result
-            jobs[req_id]['status'] = 'COMPLETE'
             return jsonify({'req_id': req_id})
         else:
             return jsonify({'error': 'Invalid data'})
     else:
         return render_template('input.html')
-
 @app.route('/api/crew/<req_id>', methods=['GET'])
 def get_job_status(req_id):
     if req_id in jobs:

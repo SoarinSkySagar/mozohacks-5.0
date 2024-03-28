@@ -6,7 +6,7 @@ from textwrap import dedent
 from crewai import Agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.9)
+llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.1)
 tool = SerperDevTool()
 
 class ProjectAgents():
