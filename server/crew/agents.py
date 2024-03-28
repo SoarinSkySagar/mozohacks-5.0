@@ -5,7 +5,7 @@ from textwrap import dedent
 from crewai import Agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.9)
+llm = ChatGoogleGenerativeAI(model='gemini-pro', verbose=True, temperature=0.9,google_api_key="AIzaSyAh-36X7c0aMzbxQB0B_CxPZ8UcctQqzHA")
 
 class ProjectAgents():
     def input_agent(self):
@@ -22,9 +22,9 @@ class ProjectAgents():
         return Agent(
             role='UI/UX Agent',
             goal='Design intuitive and engaging user interfaces',
-            backstory='Skilled in user experience design and ensuring optimal usability.',
+            backstory='Skilled in user experience design and ensuring optimal usability can make figma files or coode css  based on the website.',
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm
         )
     
@@ -34,7 +34,7 @@ class ProjectAgents():
             goal='Scrape the internet for relevant information',
             backstory='Proficient in web scraping and gathering data from various sources.',
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm
         )
 
@@ -44,7 +44,7 @@ class ProjectAgents():
             goal='Evaluate and filter scraped information',
             backstory='Experienced in analyzing and curating relevant data from various sources.',
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm
         )
 
@@ -64,17 +64,17 @@ class ProjectAgents():
             goal='Manage customer relations and ensure project delivery',
             backstory='Experienced in leading organizations, building relationships, and delivering successful projects.',
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm
         )
 
     def devrel_agent(self):
         return Agent(
-            role='Developer Relations',
-            goal='Facilitate communication and collaboration between developers',
-            backstory='Skilled in fostering developer communities and promoting best practices.',
+            role='Senior Developer Engineer',
+            goal='Write code and ensure best practices are followed',
+            backstory='Skilled in developer  practices and write best quality code while maintaining their quality.',
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm
         )
 
@@ -83,9 +83,9 @@ class ProjectAgents():
         return Agent(
             role='Frontend Junior Developer',
             goal='Develop basic frontend components and features',
-            backstory='Junior developer with knowledge of HTML, CSS, and JavaScript.',
+            backstory=' developer  with knowledge of HTML, CSS, and JavaScript who can write code for the website.',
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm
         )
 
@@ -93,27 +93,18 @@ class ProjectAgents():
         return Agent(
             role='Frontend Senior Developer',
             goal='Lead frontend development and ensure best practices',
-            backstory='Experienced frontend developer with expertise in modern frameworks and tools.',
+            backstory='Experienced frontend developer with  knowledge of HTML, CSS, and JavaScript expertise in modern frameworks and toolsand can evaluate and correct the code.',
             verbose=True,
             allow_delegation=True,
             llm=llm
         )
 
-    def lead_frontend_agent(self):
-        return Agent(
-            role='Lead Frontend Developer',
-            goal='Oversee and coordinate frontend development efforts',
-            backstory='Highly skilled frontend developer with leadership and project management experience.',
-            verbose=True,
-            allow_delegation=True,
-            llm=llm
-        )
 
     def backend_junior_agent(self):
         return Agent(
             role='Backend Junior Developer',
             goal='Develop basic backend components and APIs',
-            backstory='Junior developer with knowledge of server-side programming languages and databases.',
+            backstory='Junior developer with knowledge of server-side programming languages like node jjs who can write quality code without error and databases.',
             verbose=True,
             allow_delegation=False,
             llm=llm
@@ -123,7 +114,7 @@ class ProjectAgents():
         return Agent(
             role='Main Backend Developer',
             goal='Develop and maintain the core backend systems',
-            backstory='Experienced backend developer with expertise in server architecture and scalability.',
+            backstory='Experienced backend developer with expertise in server architecture and scalability can read and evaluuate code which is written then can correct it or optimise it.',
             verbose=True,
             allow_delegation=True,
             llm=llm
@@ -133,9 +124,9 @@ class ProjectAgents():
         return Agent(
             role='Integration Developer',
             goal='Integrate frontend and backend components',
-            backstory='Developer skilled in connecting various systems and ensuring seamless communication.',
+            backstory='Developer skilled in connecting the frontend and backend of the website code which he is provided with.',
             verbose=True,
-            allow_delegation=False,
+            allow_delegation=True,
             llm=llm
         )
 
@@ -152,8 +143,8 @@ class ProjectAgents():
     def senior_developer_agent(self):
         return Agent(
             role='Senior Developer',
-            goal='Oversee development efforts and ensure best practices',
-            backstory='Highly skilled developer with expertise in software architecture and team leadership.',
+            goal='evaluate and write code for the project',
+            backstory='Highly skilled developer with expertise in software engineering and can write and optimise quality code.',
             verbose=True,
             allow_delegation=True,
             llm=llm
