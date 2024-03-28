@@ -96,7 +96,7 @@ class ProjectAgents():
     def frontend_senior_agent(self):
         return Agent(
             role='Frontend Senior Developer',
-            goal='Lead frontend development and ensure best practices',
+            goal='provide an efficient and human readable code ',
             backstory='Experienced frontend developer with expertise in modern frameworks and tools.',
             verbose=True,
             allow_delegation=True,
@@ -146,7 +146,7 @@ class ProjectAgents():
     def tester_agent(self):
         return Agent(
             role='Tester',
-            goal='Ensure application quality through thorough testing',
+            goal='Ensure application quality through thorough testing and passing the corrected code',
             backstory='Experienced in testing software applications and identifying bugs and issues.',
             verbose=True,
             allow_delegation=False,
@@ -177,7 +177,7 @@ class ProjectAgents():
     def senior_fe_agent(self):
         return Agent(
             role='Senior Frontend Developer',
-            goal='Lead frontend development and ensure best practices for mobile apps',
+            goal='provide an efficient and human readable code ',
             backstory='Experienced frontend developer with expertise in mobile app development and performance optimization.',
             verbose=True,
             allow_delegation=True,
@@ -197,7 +197,7 @@ class ProjectAgents():
     def app_tester_agent(self):
         return Agent(
             role='App Tester',
-            goal='Ensure mobile app quality through thorough testing',
+            goal='Ensure mobile app quality through thorough testing and passing the corrected code',
             backstory='Experienced in testing mobile applications on various devices and platforms.',
             verbose=True,
             allow_delegation=False,
@@ -218,7 +218,7 @@ class ProjectAgents():
     def senior_game_dev_agent(self):
         return Agent(
             role='Senior Game Developer',
-            goal='Lead game development and ensure best practices',
+            goal='provide an efficient and human readable code ',
             backstory='Experienced game developer with expertise in game design, mechanics, and optimization.',
             verbose=True,
             allow_delegation=True,
@@ -228,7 +228,7 @@ class ProjectAgents():
     def game_tester_agent(self):
         return Agent(
             role='Game Tester',
-            goal='Ensure game quality through thorough testing',
+            goal='Ensure game quality through thorough testing and passing the corrected code',
             backstory='Experienced in testing games across various platforms and identifying bugs and issues.',
             verbose=True,
             allow_delegation=False,
