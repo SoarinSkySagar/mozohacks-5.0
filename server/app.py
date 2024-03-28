@@ -17,8 +17,8 @@ def input_data():
     if request.method == 'POST':
         data = request.get_json()
         if 'productIdea' in data and 'momma' in data:
-            project_type = data['productIdea']
-            project_idea = data['momma']
+            project_idea = data['productIdea']
+            project_type = data['momma']
             req_id = str(uuid4())
             dev_result = create_project(project_type, project_idea)
             jobs[req_id] = {
@@ -33,7 +33,8 @@ def input_data():
             return jsonify({'error': 'Invalid data'})
     else:
         return render_template('input.html')
-@app.route('/api/crew/<req_id>', methods=['GET'])
+    
+@app.route('/api/crew/<req_id>')
 def get_job_status(req_id):
     if req_id in jobs:
         job_data = jobs[req_id]
@@ -44,6 +45,7 @@ def get_job_status(req_id):
         })
     else:
         return jsonify({'error': 'Invalid request ID'}), 404
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
