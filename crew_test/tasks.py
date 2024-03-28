@@ -27,28 +27,9 @@ class WebDev():
             description=dedent(f"""\
                     Develop a fully functional website with a modern and intuitive user interface.
                     Project Idea: {project_idea}
-                    Tasks:
-                    1. Conduct user research and gather requirements.
-                    2. Design the user interface and user experience (UI/UX).
-                    3. Develop the frontend components and features using HTML, CSS, and JavaScript.
-                    4. Develop the backend systems and APIs using a backend framework like Django or Flask.
-                    5. Integrate frontend and backend components for seamless communication.
-                    6. Thoroughly test the website using automated and manual testing methods.
-                    7. Deploy the website to a hosting platform (e.g., AWS, Heroku) and optimize for performance.
+                    Tasks:write error free code fro the requested project
                     
-                    Example Code:
-                    # HTML code for a basic webpage
-                    <!DOCTYPE html>
-                    <html>
-                        <head>
-                            <title>My Website</title>
-                        </head>
-                        <body>
-                            <h1>Welcome to My Website</h1>
-                            <p>This is a sample webpage.</p>
-                        </body>
-                    </html>
-                """),
+                    """),
             expected_output='A high-quality, responsive, and well-tested website.',
             agent=agent
         )
@@ -68,6 +49,12 @@ class WebDev():
             expected_output="A thoroughly tested website with documented test results and recommendations.",
             agent=agent
         )
+    
+    
+    
+    
+    
+    
     
 class AppDev():
     def evaluation_task(self, agent, project_idea):

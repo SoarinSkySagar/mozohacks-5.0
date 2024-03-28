@@ -44,9 +44,7 @@ junior_game_dev_agent = agents.junior_game_dev_agent()
 senior_game_dev_agent = agents.senior_game_dev_agent()
 game_tester_agent = agents.game_tester_agent()
 
-# evaluation_task = tasks.evaluation_task()
-# code_task = tasks.code_development_task()
-# testing_task = tasks.testing_task()
+
 
 evaluation_task = tasks.evaluation_task(senior_scraper_agent, project_idea)
 
