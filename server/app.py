@@ -2,7 +2,16 @@ from flask import Flask, render_template, request, jsonify
 from crew.main import create_project
 from flask_cors import CORS
 from uuid import uuid4
-import time
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+client = MongoClient(os.getenv('MONGO_URI'))
+db = client.get_database("project_history")
+collection = db["history"]
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
@@ -28,6 +37,12 @@ def input_data():
                 'events': [],
                 'result': dev_result
             }
+            collection.insert_one({
+                'req_id': req_id,
+                'project_type': project_type,
+                'project_idea': project_idea,
+                'result': dev_result
+            })
             return jsonify({'req_id': req_id})
         else:
             return jsonify({'error': 'Invalid data'})
