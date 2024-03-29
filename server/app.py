@@ -32,6 +32,7 @@ class Job:
     status: str
     events: List[Event]
     result: str
+    req_id: str
 
 
 jobs = {}  # Dictionary to store Job objects (improved data structure)

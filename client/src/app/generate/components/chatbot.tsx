@@ -147,10 +147,11 @@ const ChatbotPage = () => {
                     </div>
                   ))} */}
         <div>
-         {}
+         {/*TODO: add button to redirect to code editor*/}
         </div>
               </div>
-            </div>          </div>
+            </div>      
+            </div>
         </div>
       </div>
     </div>
