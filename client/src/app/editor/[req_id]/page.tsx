@@ -1,18 +1,43 @@
 "use client";
 import Prism from "prismjs";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "prismjs/themes/prism.css";
 import { CodeError } from "./utils/interfaces";
 import Inspector from "./components/inspector";
 const espree = require("espree");
+const axios = require("axios");
 
 // TODO - breaking if we type something in quotes "".
 
 export default function Home() {
+
+  const [code, setCode] = useState("loading..");
+
+  useEffect(() => {
+    var currentURL = window.location.href;
+    var segments = currentURL.split("/");
+    var req_id = segments[segments.length - 1];
+
+    const requestData = {
+      req_id
+    };
+
+    axios.post('http://localhost:3000/api/code', requestData)
+      .then((response:any) => {
+        console.log('Response:', response.data);
+        setCode(response.data.code);
+      })
+      .catch((error:any) => {
+        // Handle error
+        console.error('Error:', error);
+      });
+
+  }, [])
+
   const editorRef = useRef<any>(null);
   const linesRef = useRef<any>(null);
-  const [code, setCode] = useState("// Write your code here");
+  // todo: add a state for the code
   const [error, setError]: any = useState();
 
   function updateCode() {

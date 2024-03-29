@@ -57,7 +57,8 @@ def input_data():
                 project_idea=project_idea,
                 status='COMPLETE',
                 events=[],
-                result=dev_result
+                result=dev_result,
+                req_id=req_id
             )
             jobs[req_id] = new_job  # Store Job object with complete status
 
