@@ -147,7 +147,7 @@ const ChatbotPage = () => {
                     </div>
                   ))} */}
         <div>
-          {responseResult && <p>{String(responseResult)}</p>}
+         {}
         </div>
               </div>
             </div>          </div>
