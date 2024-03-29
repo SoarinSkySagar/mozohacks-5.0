@@ -37,16 +37,6 @@ class WebDev():
             agent=agent
         )
     
-    def scrape_task(self, agent, project_idea):
-        return Task(
-            description=dedent(f"""\
-                Based on the project idea: {project_idea} scrape data from the web. 
-                
-                """),
-            expected_output="",
-            agent=agent
-        )
-    
     def code_development_task(self, agent, project_idea):
         return Task(
             description=dedent(f"""\

@@ -3,3 +3,4 @@ env
 .env
 server/__pycache__/
 server/crew/__pycache__/
+/node_modules/
