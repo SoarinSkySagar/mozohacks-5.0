@@ -24,7 +24,8 @@ class WebDev():
                      Deploy the enhanced website and monitor user feedback and analytics.
                 """),
             expected_output="an enhanced idea for the application, and more suggestions for improvement if a codebase has been given, also adding appropriate comments to code",
-            agent=agent
+            agent=agent,
+            output_file="evaluate_web.md"
         )
     
     def scrape_task(self, agent, project_idea):
@@ -34,7 +35,8 @@ class WebDev():
                 
                 """),
             expected_output="",
-            agent=agent
+            agent=agent,
+            output_file="scrape_web.md"
         )
     
     def code_development_task(self, agent, project_idea):
@@ -46,7 +48,8 @@ class WebDev():
                     
                     """),
             expected_output='A high-quality, responsive, and well-tested code for website, using nodejs and nextjs, with different code snippets for both frameworks.',
-            agent=agent
+            agent=agent,
+            output_file="code_development_web.md"
         )
     
     def testing_task(self, agent, project_idea):
@@ -62,7 +65,8 @@ class WebDev():
                      Document test results and prepare a test report with recommendations.
                 """),
             expected_output="ensuring the given code to be error free and responsive, then passing the code with the required changes, if any",
-            agent=agent
+            agent=agent,
+            output_file="testing_web.md"
         )
     
     
@@ -86,7 +90,8 @@ class AppDev():
                      Deploy the enhanced app and monitor user feedback and analytics.
                 """),
             expected_output="an enhanced idea for the application, and more suggestions for improvement if a codebase has been given, also adding appropriate comments to code",
-            agent=agent
+            agent=agent,
+            output_file="evaluate_app.md"
         )
         
     def scrape_task(self, agent, project_idea):
@@ -96,7 +101,8 @@ class AppDev():
                 
                 """),
             expected_output="",
-            agent=agent
+            agent=agent,
+            output_file="scrape_app.md"
         )    
     
     def code_development_task(self, agent, project_idea):
@@ -117,7 +123,8 @@ class AppDev():
                     export default LoginScreen;
                 """),
             expected_output='A high-quality,human readable and efficient code for the mobile application using flutter',
-            agent=agent
+            agent=agent,
+            output_file="code_development_app.md"
         )
     
     def testing_task(self, agent, project_idea):
@@ -133,7 +140,8 @@ class AppDev():
                      Document test results and prepare a test report with recommendations.
                 """),
             expected_output="ensuring the given code to be error free and responsive, then passing the code with the required changes, if any",
-            agent=agent
+            agent=agent,
+            output_file="testing_app.md"
         )
     
 class GameDev():
@@ -151,7 +159,8 @@ class GameDev():
                      Deploy the enhanced game and gather feedback from players for further improvements.
                 """),
             expected_output="An enhanced and optimized game with improved gameplay and user experience.",
-            agent=agent
+            agent=agent,
+            output_file="evaluate_web.md"
         )
     
     def scrape_task(self, agent, project_idea):
@@ -164,7 +173,8 @@ class GameDev():
                 """),
             expected_output="A tabular data of the available resources scraped, urls of youtube videos, medium, hashnode blogs, reddit posts etc",
             agent=agent,
-            tool=tool
+            tool=tool,
+            output_file="evaluate_web.md"
             
         )
     def code_development_task(self, agent, project_idea):
@@ -183,7 +193,8 @@ class GameDev():
                     
                 """),
             expected_output='A high-quality, and efficient C# code for the game using Unity or Unreal Engine, with appropriate comments and documentation.',
-            agent=agent
+            agent=agent,
+            output_file="evaluate_web.md"
         )
     
     def testing_task(self, agent, project_idea):
@@ -199,5 +210,6 @@ class GameDev():
                     5. Document test results and prepare a test report with recommendations.
                 """),
             expected_output="ensuring the given code to be error free and responsive, then passing the code with the required changes, if any",
-            agent=agent
+            agent=agent,
+            output_file="evaluate_web.md"
         )
